@@ -1,0 +1,25 @@
+@import "src/styles/variable";
+
+
+.infoCart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 16px;
+    width: 100%;
+    background: $cardBg;
+    z-index: 9999;
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .item {
+            flex-basis: 100%;
+            text-align: center;
+        }
+    }
+}
+

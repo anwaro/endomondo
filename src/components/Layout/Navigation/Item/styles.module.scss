@@ -1,0 +1,25 @@
+.navItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .navLabel {
+        color: #bdbdbd;
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    &.active {
+
+        .navLabel {
+            color: #000;
+        }
+    }
+
+    .navIcon {
+        width: 24px;
+        height: 24px;
+    }
+
+}

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap');
+@import "variable";
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: $dark;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2em; //32px
+    line-height: 1.38;
+}
+
+h2 {
+    font-size: 1.5em; //24px
+    line-height: 1.38;
+}
+
+h4 {
+    font-size: 1em; //16px
+}
+
+h6 {
+    line-height: 1.5;
+    font-size: 0.7em; //12px
+}
+
+p, span {
+    line-height: 1.71;
+
+    &.small {
+        line-height: 1.5;
+        font-size: 0.85em; //16px
+    }
+}
+
+.light {
+    color: rgba($dark, 0.4);
+}

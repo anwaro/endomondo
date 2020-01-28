@@ -1,0 +1,23 @@
+@import "src/styles/variable";
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.value {
+    text-align: center;
+    font-size: 34px;
+    font-weight: bold;
+    color: $font-color;
+}
+
+.label {
+    text-align: center;
+    color: $font-color-light;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+

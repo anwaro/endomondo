@@ -1,0 +1,19 @@
+{
+    "en": {
+        "dashboard": {
+            "title": "Panel"
+        },
+        "history": {
+            "title": "History"
+        },
+        "training": {
+            "title": "Training"
+        },
+        "inbox": {
+            "title": "Inbox"
+        },
+        "more": {
+            "title": "More"
+        }
+    }
+}
