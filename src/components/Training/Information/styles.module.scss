@@ -5,10 +5,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 16px;
+    padding: 16px 16px 0;
     width: 100%;
     background: $cardBg;
     z-index: 9999;
+    user-select: none;
+    overscroll-behavior: contain;
+    overflow-y: hidden;
 
     .row {
         display: flex;
@@ -19,7 +22,24 @@
         .item {
             flex-basis: 100%;
             text-align: center;
+            position: relative;
         }
+
+        .mainDetail {
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+        }
+    }
+
+    .handler {
+        width: 40px;
+        height: 6px;
+        border-radius: 3px;
+        margin: 24px auto 8px;
+        background: #d3d6df;
     }
 }
 

@@ -1,30 +1,30 @@
-import React from 'react';
-import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
+import React, {useState} from 'react';
+import ReactMapGL, {GeolocateControl, NavigationControl} from 'react-map-gl';
 
-import I18n from "../../../services/I18n";
-
-const MapboxMap = ReactMapboxGl({
-    accessToken:
-        'pk.eyJ1IjoiYW53YXJvIiwiYSI6ImNrNXRrM21seTBsdjMzaGxvbHQ1ejNvMnAifQ.3MMrJCdLnp2flaxFF3a9ow'
-});
 
 const Map: React.FC = () => {
+    const [viewport, setViewport] = useState({zoom: 12});
     return (
         <div style={{height: '100%', width: '100%'}}>
-            <MapboxMap
-                style="mapbox://styles/mapbox/streets-v9"
-                containerStyle={{
-                    height: '100%',
-                    width: '100%'
-                }}
+            <ReactMapGL
+                {...viewport}
+                mapboxApiAccessToken={'pk.eyJ1IjoiYW53YXJvIiwiYSI6ImNrNXRrM21seTBsdjMzaGxvbHQ1ejNvMnAifQ.3MMrJCdLnp2flaxFF3a9ow'}
+                width="100%"
+                height="100%"
+                onViewportChange={(viewport: any) => setViewport(viewport)}
             >
-                <Layer type="symbol" id="marker" layout={{'icon-image': 'marker-15'}}>
-                    <Feature coordinates={[-0.481747846041145, 51.3233379650232]}/>
-                </Layer>
-            </MapboxMap>
+                <div style={{position: 'absolute', right: 0}}>
+                    <NavigationControl/>
+                    <GeolocateControl
+                        positionOptions={{enableHighAccuracy: true}}
+                        trackUserLocation={true}
+                        // @ts-ignore
+                        onGeolocate={console.log}
+                    />
+                </div>
+            </ReactMapGL>
         </div>
     )
 };
-
 
 export default Map;

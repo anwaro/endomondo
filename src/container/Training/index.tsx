@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {geolocated, GeolocatedProps} from "react-geolocated";
 
 import Layout from "../../components/Layout/Layout";
 import Information from "../../components/Training/Information";
@@ -7,9 +6,6 @@ import Map from "../../components/Training/Map";
 import Controls from "../../components/Training/Controls";
 import I18n from "../../services/I18n";
 
-interface TrainingProps extends GeolocatedProps {
-
-}
 
 export const STATUS = {
     LOADING: 'LOADING',
@@ -18,7 +14,7 @@ export const STATUS = {
     PAUSED: 'PAUSED',
 };
 
-const Training: React.FC<TrainingProps> = (props) => {
+const Training: React.FC = () => {
     const [status, setStatus] = useState(STATUS.READY);
 
     const startClick = () => {
@@ -28,6 +24,7 @@ const Training: React.FC<TrainingProps> = (props) => {
             setStatus(STATUS.PAUSED)
         }
     };
+
 
     const stopClick = () => {
         setStatus(STATUS.READY)
@@ -39,7 +36,9 @@ const Training: React.FC<TrainingProps> = (props) => {
                 title: I18n.t('training.title')
             }}
         >
-            <Information/>
+            <Information
+                speed={0}
+            />
             <Map/>
             <Controls
                 status={status}
@@ -49,25 +48,5 @@ const Training: React.FC<TrainingProps> = (props) => {
         </Layout>
     )
 };
-/**
- *
- * {
-    positionOptions: {
-        enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: Infinity,
-    },
-    watchPosition: false,
-    userDecisionTimeout: null,
-    suppressLocationOnMount: false,
-    geolocationProvider: navigator.geolocation,
-    isO
- */
 
-
-export default geolocated({
-    positionOptions: {
-        enableHighAccuracy: true,
-    },
-    watchPosition: true,
-})(Training);
+export default Training;

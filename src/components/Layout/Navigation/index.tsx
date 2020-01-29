@@ -1,13 +1,14 @@
 import React from 'react';
-import {useLocation} from "react-router";
+import {useLocation} from "react-router-dom";
 
 import styles from './styles.module.scss'
 import Item, {ItemProps} from "./Item";
 
-import logo from '../../../static/logo.png';
-import logoBlack from '../../../static/logo-black.png';
 import I18n from "../../../services/I18n";
 
+import {
+    dashboard, dashboardLight, history, historyLight, training, trainingLight, inbox, inboxLight, more, moreLight
+} from '../../../static/icon/menu'
 
 export interface NavigationProps {
     title?: string;
@@ -16,43 +17,42 @@ export interface NavigationProps {
 const navItems = [{
     title: I18n.t('dashboard.title'),
     to: '/',
-    icon: logo,
-    activeIcon: logoBlack,
+    icon: dashboardLight,
+    activeIcon: dashboard,
     active: false
 
 }, {
     title: I18n.t('history.title'),
     to: '/history',
-    icon: logo,
-    activeIcon: logoBlack,
+    icon: historyLight,
+    activeIcon: history,
     active: false
 
 }, {
     title: I18n.t('training.title'),
     to: '/training',
-    icon: logo,
-    activeIcon: logoBlack,
+    icon: trainingLight,
+    activeIcon: training,
     active: false
 
 }, {
     title: I18n.t('inbox.title'),
     to: '/inbox',
-    icon: logo,
-    activeIcon: logoBlack,
+    icon: inboxLight,
+    activeIcon: inbox,
     active: false
 
 }, {
     title: I18n.t('more.title'),
     to: '/more',
-    icon: logo,
-    activeIcon: logoBlack,
+    icon: moreLight,
+    activeIcon: more,
     active: false
 
 }] as ItemProps[];
 
 const Navigation: React.FC<NavigationProps> = ({title = ''}) => {
-    let location = useLocation();
-    console.log(location);
+    const location = useLocation();
     const itemIsActive = (to: string) => location.pathname === to;
 
     return (

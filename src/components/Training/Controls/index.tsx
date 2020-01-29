@@ -6,9 +6,7 @@ import IconButton from "../../Html/IconButton";
 import {STATUS} from "../../../container/Training";
 import {joinClass} from "../../../utils/joinClass";
 
-import play from '../../../static/icon/play.svg';
-import pause from '../../../static/icon/pause.svg';
-import stop from '../../../static/icon/stop.svg';
+import {play, pause, stop} from '../../../static/icon/control';
 
 interface ControlsProps {
     status: string;

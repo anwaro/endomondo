@@ -1,12 +1,27 @@
 import React from 'react';
 import {mount} from 'enzyme';
 
-import Header from "./index";
-import {render} from "@testing-library/react";
+import Navigation from "./index";
+import {BrowserRouter} from "react-router-dom";
 
-test('Header contains title', () => {
-    const title = 'example title';
-    const {getByText} = render(<Header title={title}/>);
-    const titleElement = getByText(new RegExp(title));
-    expect(titleElement).toBeInTheDocument();
+test('first menu item is active second is non active', () => {
+    const nav = mount(
+        <BrowserRouter>
+            <Navigation/>
+        </BrowserRouter>
+    );
+    const firstItem = nav
+        .find('Item')
+        .at(0);
+    const secondItem = nav
+        .find('Item')
+        .at(1);
+
+    // @ts-ignore
+    expect(firstItem.props().active).toBe(true);
+
+    // @ts-ignore
+    expect(secondItem.props().active).toBe(false);
+
 });
+
