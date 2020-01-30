@@ -11,10 +11,10 @@ import interpolate, {Extrapolate} from "../../../utils/interpolate";
 let animationFrame = 0;
 
 interface InformationProps {
-    speed: number;
+    location: Coordinates;
 }
 
-const Information: React.FC<InformationProps> = () => {
+const Information: React.FC<InformationProps> = ({location}) => {
 
     const [state, setState] = useState({
         y: 205,
@@ -105,6 +105,7 @@ const Information: React.FC<InformationProps> = () => {
         Extrapolate.CLAMP
     );
 
+
     return (
         <div
             onMouseDown={draggingStart}
@@ -113,6 +114,7 @@ const Information: React.FC<InformationProps> = () => {
         >
             <div className={styles.row}>
                 <span>BIEGANIE</span>
+                <span>lon:{location.longitude} lat:{location.latitude}</span>
                 <GpsIcon/>
             </div>
             <div className={styles.row} style={{marginTop: margin}}>

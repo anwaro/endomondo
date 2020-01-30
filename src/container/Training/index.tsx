@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
 import Layout from "../../components/Layout/Layout";
-import Information from "../../components/Training/Information";
 import Map from "../../components/Training/Map";
 import Controls from "../../components/Training/Controls";
+
 import I18n from "../../services/I18n";
 
 
@@ -14,8 +14,20 @@ export const STATUS = {
     PAUSED: 'PAUSED',
 };
 
+const emptyLocation: Coordinates = {
+    latitude: 0,
+    longitude: 0,
+    accuracy: 0,
+    altitude: null,
+    altitudeAccuracy: null,
+    heading: null,
+    speed: null,
+};
+
 const Training: React.FC = () => {
     const [status, setStatus] = useState(STATUS.READY);
+    const [location, setLocation] = useState<Coordinates>(emptyLocation);
+    const [route, setRoute] = useState<number[][]>([]);
 
     const startClick = () => {
         if (status === STATUS.READY || status === STATUS.PAUSED) {
@@ -23,6 +35,12 @@ const Training: React.FC = () => {
         } else if (status === STATUS.STARTED) {
             setStatus(STATUS.PAUSED)
         }
+    };
+
+    const onGeolocate = (location: Coordinates, timestamp: number) => {
+        setLocation(location);
+        setRoute(points => [...points, [ location.longitude, location.latitude]]);
+
     };
 
 
@@ -36,10 +54,13 @@ const Training: React.FC = () => {
                 title: I18n.t('training.title')
             }}
         >
-            <Information
-                speed={0}
+            {/*<Information*/}
+            {/*    location={location}*/}
+            {/*/>*/}
+            <Map
+                onGeolocate={onGeolocate}
+                route={route}
             />
-            <Map/>
             <Controls
                 status={status}
                 onCLick={startClick}
