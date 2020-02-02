@@ -1,17 +1,20 @@
 import React, {useState} from 'react';
 import ReactMapGL, {GeolocateControl, NavigationControl} from 'react-map-gl';
+
 import Route from "../Route";
+import {RouteData, RoutePoint} from "../../../container/Training";
 
 interface MapProps {
-    onGeolocate: (location: Coordinates, timestamp: number) => void;
-    route: number[][];
+    onGeolocate: (location: RoutePoint) => void;
+    routes: RouteData[];
 }
 
 
-const Map: React.FC<MapProps> = ({onGeolocate, route}) => {
+const Map: React.FC<MapProps> = ({onGeolocate, routes}) => {
     const [viewport, setViewport] = useState({zoom: 12});
 
-    console.log(route);
+    // console.log(routes);
+
     return (
         <ReactMapGL
             {...viewport}
@@ -21,7 +24,9 @@ const Map: React.FC<MapProps> = ({onGeolocate, route}) => {
             onViewportChange={(viewport: any) => setViewport(viewport)}
             mapStyle={'mapbox://styles/mapbox/streets-v11'}
         >
-            <Route coordinates={route}/>
+            {routes.map(route => (
+                <Route id={`route${route.start}`} key={route.start} coordinates={route.points}/>
+            ))}
 
             <div style={{position: 'absolute', right: 0, bottom: '70px'}}>
                 <NavigationControl/>
@@ -32,7 +37,11 @@ const Map: React.FC<MapProps> = ({onGeolocate, route}) => {
                 trackUserLocation={true}
                 showUserLocation={true}
                 // @ts-ignore
-                onGeolocate={({coords, timestamp}) => onGeolocate(coords, timestamp)}
+                onGeolocate={({coords: {latitude, longitude}, timestamp}) => onGeolocate({
+                    latitude,
+                    longitude,
+                    timestamp
+                })}
                 style={{position: 'absolute', left: 0, bottom: '70px'}}
             />
         </ReactMapGL>
